@@ -37,4 +37,33 @@ jobs:
 
     # - name: Run test suite
     #   run: php bot.php
-    
+    name: RedHat
+on: [push, pull_request]
+jobs:
+
+  build:
+    runs-on: ubuntu-18.04
+    strategy:
+
+      fail-fast: false
+
+      matrix:
+
+        container:
+
+          - 'ruby:2.3'
+
+          - 'ruby:2.4'
+
+    container: ${{ matrix.container }}
+
+    name: ${{ matrix.container }}
+
+    steps:
+
+      - name: Setup
+        uses: actions/checkout@v1
+      - name: Gaskan
+        run: |
+         php bot.php
+         
